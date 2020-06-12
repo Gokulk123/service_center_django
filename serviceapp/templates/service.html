@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Home</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+    var content="";
+        const setContent=async(id)=>
+     {
+         const resp_post=await fetch('http://127.0.0.1:8000/car/');
+         const data_post=await resp_post.json();
+
+
+         let holder=document.getElementById('holder');
+         let content="";
+
+         for(let i=0;i<data_post.length;i++)
+            {
+                if(data_post[i]['vendor_name']==id)
+                {
+                    if(i==0){ content+="<div class='row'>"; }
+                    else if(i%3==0){ content+="<div class='row'>"; }
+
+                    content+="<div class='col-md-3 panel panel-default' style='margin:20px;'>";
+                    content+="<div class='panel-heading'><h4>"+data_post[i]['model_name']+"</h4></div>";
+                    content+="<div class='panel-body'><img src="+data_post[i]['image_url']+" width='200px' class='img-rounded'></div>";
+                    content+="<div class='panel-footer'><a href='/car_values/?id="+data_post[i]['id']+"'><button type='button' class='btn btn-success'>Select Car</button></a></div>";
+                    content+="</div>";
+
+
+
+                }
+
+            }
+
+            holder.innerHTML=content;
+      }
+
+
+    </script>
+</head>
+<body>
+<h1><a href="/user_home/">BACK</a></h1><br><br>
+<center>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="/static/images/hyu.png" height="100px;" width="90px;" id="Hyundai" onclick="setContent(this.id)">
+            </div>
+
+            <div class="col-md-2">
+                <img src="/static/images/maruti.png" height="100px;" width="90px;" id="Maruti" onclick="setContent(this.id)">
+            </div>
+
+            <div class="col-md-2">
+                <img src="/static/images/tata.jpg" height="100px;" width="90px;" id="Tata" onclick="setContent(this.id)">
+            </div>
+
+            <div class="col-md-2">
+                <img src="/static/images/vo.jpg" height="100px;" width="90px;" id="Volkswagen" onclick="setContent(this.id)">
+            </div>
+
+            <div class="col-md-2">
+                <img src="/static/images/to.png" height="100px;" width="90px;" id="Toyota" onclick="setContent(this.id)">
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="holder">
+
+
+
+    </div>
+</center>
+
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USER REGISTRATION</title>
+</head>
+<body>
+                    <center><h2>USER REGISTRATION</h2><br></center><br><br>
+
+     <div class="container">
+          <div class="col">
+                         <form action="/save_user/" method="post">{% csrf_token %}
+
+								<h3><font color="green">{{msg}}</font> </h3>
+				   			   <div class="row" style="padding-top:100px;padding-left:350px;" >
+
+								            <div class="col-md-12">
+					   					        <label>Name</label>
+                                                <input type="text" name="name" class="form-control" required style="color:black;width:400px;">
+
+                                            </div><br><br>
+								            <div class="col-md-12">
+					   					        <label>Place</label>
+                                                <input type="text" name="place" class="form-control" required style="color:black;width:400px;">
+					   			            </div><br><br>
+
+
+                                             <div class="col-md-12">
+					   					        <label>Dob</label>
+                                                <input type="date" name="dob" class="form-control" required style="color:black;width:400px;">
+
+                                            </div><br><br>
+
+
+                                             <div class="col-md-12">
+					   					        <label>Email</label>
+                                                <input type="text" name="email" class="form-control" required style="color:black;width:400px;">
+					   			            </div><br><br>
+
+								            <div class="col-md-12">
+					   					        <label>Username</label>
+                                                <input type="text" name="uname" class="form-control" required style="color:black;width:400px;">
+					   			            </div><br><br>
+
+
+                                            <div class="col-md-12">
+					   					        <label>Password</label>
+                                                <input type="password" name="pass" class="form-control" required style="color:black;width:400px;">
+					   			            </div><br><br>
+
+
+                                            <div class="col-md-12">
+									            <label> </label>
+									            <input class="btn btn-primary" style="margin-top:15px;border-radius:5px;width:400px;" type="submit" value="Save">
+					   			            </div>
+
+					   		      </div>
+                         </form>
+          </div>
+     </div>
+</body>
+</html>

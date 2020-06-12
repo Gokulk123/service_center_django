@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Home</title>
+    <script>
+
+        function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+    }
+
+
+         var content="";
+        const setContent=async()=>
+     {
+         const resp_post=await fetch('http://127.0.0.1:8000/car_details/?id='+findGetParameter('id'));
+         const data_post=await resp_post.json();
+         //alert(data_post);
+
+         var result="";
+
+                        result+='<div><img src="'+data_post[0]["image_url"]+'"></div><br>';
+                        result+='<div class="form-group">Vendor:&nbsp;&nbsp;<input type="text" name="vendor" value="'+data_post[0]["vendor_name"]+'" readonly></div><br>';
+                        result+='<div class="form-group">Model:&nbsp;&nbsp;<input type="text" name="model" value="'+data_post[0]["model_name"]+'" readonly></div><br>';
+                        result+='<div class="form-group">Approximate date of Purchase:&nbsp;&nbsp;<input type="date" name="date"></div><br>';
+                        result+='<div class="form-group">Problem statement:&nbsp;&nbsp;<textarea name="problem"></textarea></div><br>';
+                        result+='<div class="form-group"><input type="submit" value="save"></div><br>';
+                        result+='<div class="form-group"><input type="hidden" name="u_id" value="{{ad.id}}" readonly></div><br>';
+                        result+='<div class="form-group"><input type="hidden" name="id"  value="'+data_post[0]["id"]+'" readonly></div><br>';
+
+
+
+
+
+
+
+
+         document.getElementById("details").innerHTML=result;
+
+      }
+setContent();
+
+    </script>
+
+    </script>
+</head>
+<body>
+    <h1>Welcome {{user}}</h1><br><br>
+<a href="/service/">Service</a><br><br>
+<a href="/book_details/">Booking Details</a><br><br>
+<a href="/user_logout/">Logout</a>
+<h1 style="color:green;">{{msg}}</h1>
+<form action="/save_booking/" method="post" >
+{% csrf_token %}
+<span id="details">
+
+</span>
+</form>
+
+</body>
+</html>
